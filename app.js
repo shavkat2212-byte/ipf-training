@@ -1,5 +1,5 @@
 // ИПФ — обучение сотрудников (М Булак). Bump VERSION (and ?v= in index.html) after adding/changing lessons.
-const VERSION = "2";
+const VERSION = "3";
 const T = {
   ru:{brand:"ИПФ — обучение сотрудников",sub:"Исламское окно М Булак · 5 недель, 1 урок в неделю",week:"Неделя",soon:"Скоро",done:"Пройден",best:"Лучший результат",goal:"Цель урока",theses:"Основные тезисы",test:"Пройти тест",back:"← К урокам",q:"Вопрос",of:"из",next:"Далее",finish:"Результат",res:"Результат теста",pass:"Урок пройден ✅",fail:"Нужно 80% и выше. Перечитайте тезисы и попробуйте ещё раз.",retry:"Пройти ещё раз",toLesson:"К тезисам",load:"Загрузка…",err:"Не удалось загрузить. Проверьте интернет."},
   ky:{brand:"ИПФ — кызматкерлерди окутуу",sub:"М Булактын Исламдык терезеси · 5 жума, жумасына 1 сабак",week:"Жума",soon:"Жакында",done:"Өттү",best:"Эң жакшы жыйынтык",goal:"Сабактын максаты",theses:"Негизги тезистер",test:"Тест тапшыруу",back:"← Сабактарга",q:"Суроо",of:"ичинен",next:"Кийинки",finish:"Жыйынтык",res:"Тесттин жыйынтыгы",pass:"Сабак өттү ✅",fail:"80% жана андан жогору керек. Тезистерди кайра окуп, дагы аракет кылыңыз.",retry:"Кайра тапшыруу",toLesson:"Тезистерге",load:"Жүктөлүүдө…",err:"Жүктөлгөн жок. Интернетти текшериңиз."}
@@ -31,9 +31,9 @@ async function home(){
 }
 async function lesson(id){
   const l=await getJSON(`lessons/${id}.json`),p=prog();
-  app.innerHTML=`<a href="#/" class="muted">${t("back")}</a><div class="wk" style="margin-top:10px">${t("week")} ${l.week}</div><h1>${esc(L(l.title))}</h1>
+  app.innerHTML=`<a href="#/" class="muted">${t("back")}</a><div class="wk" style="margin-top:10px">${t("week")} ${l.week}</div><h1>${esc(L(l.title))}</h1>${l.cover?`<img class="cover" src="${esc(l.cover)}" alt="">`:""}
   <div class="goal"><b>${t("goal")}:</b> ${esc(L(l.goal))}</div><h2>${t("theses")}</h2>`+
-  l.theses.map((th,i)=>`<div class="card th"><div class="num">${i+1}</div><div>${esc(L(th))}</div></div>`).join("")+
+  l.theses.map((th,i)=>`<div class="card th${th.image?" has-img":""}">${th.image?`<img class="th-img" src="${esc(th.image)}" alt="" loading="lazy">`:""}<div class="num">${i+1}</div><div>${esc(L(th))}</div></div>`).join("")+
   (p.best[id]!=null?`<p class="muted center">${t("best")}: ${p.best[id]}%</p>`:"")+
   (l.quiz&&l.quiz.length?`<a class="btn" href="#/quiz/${id}">${t("test")}</a>`:"");
 }

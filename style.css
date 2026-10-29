@@ -21,3 +21,7 @@ h1{font-size:22px;margin:8px 0}h2{font-size:18px}
 .opt.ok{border-color:#1a8a73;background:#e3f6ef}.opt.bad{border-color:#c0504d;background:#fbeaea}
 .bar{height:6px;background:#dbe7e3;border-radius:3px;overflow:hidden}.bar i{display:block;height:100%;background:#1a8a73}
 .score{font-size:40px;font-weight:800;color:#0f5c4d;text-align:center}
+.cover{width:100%;border-radius:14px;margin:12px 0;display:block;aspect-ratio:16/9;object-fit:cover}
+.th-img{width:100%;border-radius:10px;margin:0 0 10px;display:block;aspect-ratio:4/3;object-fit:cover}
+.card.th.has-img{flex-wrap:wrap}
+.card.th.has-img .th-img{flex:0 0 100%}
