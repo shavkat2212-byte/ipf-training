@@ -26,3 +26,4 @@ h1{font-size:22px;margin:8px 0}h2{font-size:18px}
 .card.th.has-img{flex-wrap:wrap}
 .card.th.has-img .th-img{flex:0 0 100%}
 .card.th.has-img>div:last-child{flex:1;min-width:0}
+.inp{width:100%;box-sizing:border-box;padding:10px;border:1px solid #cfd8d5;border-radius:10px;margin:0 0 10px;font:inherit}
