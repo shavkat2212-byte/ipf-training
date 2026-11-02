@@ -1,8 +1,8 @@
 // ИПФ — обучение сотрудников (М Булак). Bump VERSION (and ?v= in index.html) after adding/changing lessons.
-const VERSION = "4";
+const VERSION = "5";
 const T = {
-  ru:{brand:"ИПФ — обучение сотрудников",sub:"Исламское окно М Булак · 5 недель, 1 урок в неделю",week:"Неделя",soon:"Скоро",done:"Пройден",best:"Лучший результат",goal:"Цель урока",theses:"Основные тезисы",test:"Пройти тест",back:"← К урокам",q:"Вопрос",of:"из",next:"Далее",finish:"Результат",res:"Результат теста",pass:"Урок пройден ✅",fail:"Нужно 80% и выше. Перечитайте тезисы и попробуйте ещё раз.",retry:"Пройти ещё раз",toLesson:"К тезисам",load:"Загрузка…",err:"Не удалось загрузить. Проверьте интернет."},
-  ky:{brand:"ИПФ — кызматкерлерди окутуу",sub:"М Булактын Исламдык терезеси · 5 жума, жумасына 1 сабак",week:"Жума",soon:"Жакында",done:"Өттү",best:"Эң жакшы жыйынтык",goal:"Сабактын максаты",theses:"Негизги тезистер",test:"Тест тапшыруу",back:"← Сабактарга",q:"Суроо",of:"ичинен",next:"Кийинки",finish:"Жыйынтык",res:"Тесттин жыйынтыгы",pass:"Сабак өттү ✅",fail:"80% жана андан жогору керек. Тезистерди кайра окуп, дагы аракет кылыңыз.",retry:"Кайра тапшыруу",toLesson:"Тезистерге",load:"Жүктөлүүдө…",err:"Жүктөлгөн жок. Интернетти текшериңиз."}
+  ru:{brand:"ИПФ — обучение сотрудников",sub:"Исламское окно М Булак · 5 недель, 1 урок в неделю",week:"Неделя",soon:"Скоро",done:"Пройден",best:"Лучший результат",goal:"Цель урока",theses:"Основные тезисы",test:"Пройти тест",back:"← К урокам",q:"Вопрос",of:"из",next:"Далее",finish:"Результат",res:"Результат теста",pass:"Урок пройден ✅",fail:"Нужно 80% и выше. Перечитайте тезисы и попробуйте ещё раз.",retry:"Пройти ещё раз",toLesson:"К тезисам",books:"Книги",noBooks:"Книги скоро появятся.",dl:"Скачать PDF",load:"Загрузка…",err:"Не удалось загрузить. Проверьте интернет."},
+  ky:{brand:"ИПФ — кызматкерлерди окутуу",sub:"М Булактын Исламдык терезеси · 5 жума, жумасына 1 сабак",week:"Жума",soon:"Жакында",done:"Өттү",best:"Эң жакшы жыйынтык",goal:"Сабактын максаты",theses:"Негизги тезистер",test:"Тест тапшыруу",back:"← Сабактарга",q:"Суроо",of:"ичинен",next:"Кийинки",finish:"Жыйынтык",res:"Тесттин жыйынтыгы",pass:"Сабак өттү ✅",fail:"80% жана андан жогору керек. Тезистерди кайра окуп, дагы аракет кылыңыз.",retry:"Кайра тапшыруу",toLesson:"Тезистерге",books:"Китептер",noBooks:"Китептер жакында кошулат.",dl:"PDF жүктөп алуу",load:"Жүктөлүүдө…",err:"Жүктөлгөн жок. Интернетти текшериңиз."}
 };
 const LS="ipf_progress_v1";
 let lang=localStorage.getItem("ipf_lang")||"ru";
@@ -27,7 +27,10 @@ async function home(){
     const badge=!x.ready?`<span class="badge">🔒 ${t("soon")}</span>`:done?`<span class="badge done">✓ ${t("done")}</span>`:best!=null?`<span class="badge">${best}%</span>`:"";
     const inner=`${badge}<div class="wk">${t("week")} ${x.week}</div><div><b>${esc(L(x.title))}</b></div>`;
     return x.ready?`<a class="card" href="#/lesson/${x.id}">${inner}</a>`:`<div class="card locked">${inner}</div>`;
-  }).join("");
+  }).join("")+`<h2>📚 ${t("books")}</h2><div id="books" class="muted">${t("load")}</div>`;
+  getJSON("books/index.json").then(b=>{const el=document.getElementById("books");if(!el)return;
+    el.className="";el.innerHTML=b.books.length?b.books.map(k=>`<a class="card" href="${esc(k.file)}" target="_blank" rel="noopener" download><div><b>${esc(L(k.title))}</b></div><div class="muted">${t("dl")}${k.size?" · "+esc(k.size):""}</div></a>`).join(""):`<p class="muted">${t("noBooks")}</p>`;
+  }).catch(()=>{const el=document.getElementById("books");if(el)el.textContent=t("err")});
 }
 async function lesson(id){
   const l=await getJSON(`lessons/${id}.json`),p=prog();
