@@ -27,3 +27,9 @@ h1{font-size:22px;margin:8px 0}h2{font-size:18px}
 .card.th.has-img .th-img{flex:0 0 100%}
 .card.th.has-img>div:last-child{flex:1;min-width:0}
 .inp{width:100%;box-sizing:border-box;padding:10px;border:1px solid #cfd8d5;border-radius:10px;margin:0 0 10px;font:inherit}
+
+.sec h3{margin:6px 0 8px;font-size:18px;color:#0f5c4d}.sec p{margin:0 0 10px;line-height:1.6;white-space:pre-line}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.03em}
+.b-theory{background:#e3f1ed;color:#0f5c4d}.b-steps{background:#fff1d6;color:#8a5a00}.b-example{background:#e6ecff;color:#2b47a8}
+.sec-steps{border-left:4px solid #e0a930}.sec-example{border-left:4px solid #5b7be0}.sec-theory{border-left:4px solid #0f5c4d}
+.steps{margin:4px 0 0;padding-left:22px;line-height:1.55}.steps li{margin:0 0 8px}

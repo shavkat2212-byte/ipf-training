@@ -1,5 +1,5 @@
 // Network-first; falls back to cache so already-loaded lessons work offline.
-const C="ipf-cache-v8";
+const C="ipf-cache-v9";
 self.addEventListener("install",e=>self.skipWaiting());
 self.addEventListener("activate",e=>e.waitUntil(self.clients.claim()));
 self.addEventListener("fetch",e=>{if(e.request.method!=="GET")return;
